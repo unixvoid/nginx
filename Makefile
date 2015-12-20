@@ -1,6 +1,13 @@
 stage:
 	cd stage.0 && ./build.sh
 
+stageonly:
+	cd stage.0 && ./build.sh
+	cp stage.0/nginx .
+	@echo "----------------"
+	@echo " binary build"
+	@echo "----------------"
+
 aci:
 	cd stage.1/aci/ && \
 		cp manifest.json nginx-layout/manifest && \
