@@ -20,6 +20,15 @@ on to build the actual containers (stage.1).
     make aci
     ```
 
+- **configuration**
+  this build of nginx takes 3 mounts to get running. the conf, ssl (if needed), and data.
+  these can be mounted to the following directories inside of the container.
+  ```
+  /cryo/conf/   : nginx.conf goes here
+  /cryo/ssl     : ssl certs go here
+  /cryo/data    : and shared content to be served goes here
+  ```
+
 - **dependencies**  
   if you only care about the nginx docker, only `docker` is required  
   if you want to build the aci container, you will need `docker` and `actools`
