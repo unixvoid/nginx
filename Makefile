@@ -1,10 +1,10 @@
 stage:
 	cd stage.0 && ./build.sh
-	cp nginx ../stage.1/aci/
+	cd stage.0 && cp nginx ../stage.1/aci/ && \
 	mv nginx ../stage.1/docker/
-	echo "------------------------------------------------------"
-	echo " nginx binary moved to stage.1/aci and stage.1/docker"
-	echo "------------------------------------------------------"
+	@echo "------------------------------------------------------"
+	@echo " nginx binary moved to stage.1/aci and stage.1/docker"
+	@echo "------------------------------------------------------"
 
 build:
 	cd stage.0 && ./build.sh
