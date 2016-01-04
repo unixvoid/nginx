@@ -10,11 +10,11 @@ on to build the actual containers (stage.1).
   if you dont really care how this works, make sure all dependencies are met and follow the below steps
   - aci  
     `make stage`  
-    `make docker`
+    `make aci`
 
   - docker  
     `make stage`  
-    `make aci`
+    `make docker`
 
 - **configuration**
   this build of nginx takes 3 mounts to get running. the conf, ssl (if needed), and data.
