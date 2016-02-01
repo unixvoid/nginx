@@ -12,8 +12,8 @@ RUN apk add \
 RUN wget http://nginx.org/download/nginx-1.9.9.tar.gz && \
     tar -xzf /nginx-1.9.9.tar.gz && \
     cd /nginx-1.9.9/ && \
-    wget https://www.openssl.org/source/openssl-1.0.2e.tar.gz --no-check-certificate && \
-    tar -xzf openssl-1.0.2e.tar.gz 
+    wget https://www.openssl.org/source/openssl-1.0.2f.tar.gz --no-check-certificate && \
+    tar -xzf openssl-1.0.2f.tar.gz 
 
 RUN cd /nginx-1.9.9 && ./configure \
     --with-ld-opt="-static" \
@@ -27,7 +27,7 @@ RUN cd /nginx-1.9.9 && ./configure \
     --pid-path=/cryo/log/nginx.pid \
     --lock-path=/cryo/log/nginx.lock \
     --with-http_ssl_module \
-    --with-openssl=./openssl-1.0.2e
+    --with-openssl=./openssl-1.0.2f
 
 RUN cd /nginx-1.9.9 && make && make install
 CMD ["cp", "/bin/nginx", "/stage/"]
