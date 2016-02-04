@@ -26,6 +26,7 @@ RUN cd /nginx-1.9.9 && ./configure \
     --http-client-body-temp-path=/cryo/log/client_body_temp \
     --pid-path=/cryo/log/nginx.pid \
     --lock-path=/cryo/log/nginx.lock \
+    --with-stream \
     --with-http_ssl_module \
     --with-openssl=./openssl-1.0.2f
 

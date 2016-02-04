@@ -14,6 +14,7 @@ build:
 	@echo "----------------"
 
 aci:
+	cp nginx stage.1/aci/nginx-layout/rootfs/bin/
 	cd stage.1/aci/ && \
 		cp manifest.json nginx-layout/manifest && \
 		cp nginx nginx-layout/rootfs/bin && \
