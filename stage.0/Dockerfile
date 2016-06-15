@@ -9,13 +9,13 @@ RUN apk add \
   perl \
   wget
 
-RUN wget http://nginx.org/download/nginx-1.9.9.tar.gz && \
-    tar -xzf /nginx-1.9.9.tar.gz && \
-    cd /nginx-1.9.9/ && \
-    wget https://www.openssl.org/source/openssl-1.0.2f.tar.gz --no-check-certificate && \
-    tar -xzf openssl-1.0.2f.tar.gz 
+RUN wget http://nginx.org/download/nginx-1.11.1.tar.gz && \
+    tar -xzf /nginx-1.11.1.tar.gz && \
+    cd /nginx-1.11.1/ && \
+    wget https://www.openssl.org/source/openssl-1.0.2h.tar.gz --no-check-certificate && \
+    tar -xzf openssl-1.0.2h.tar.gz 
 
-RUN cd /nginx-1.9.9 && ./configure \
+RUN cd /nginx-1.11.1 && ./configure \
     --with-ld-opt="-static" \
     --sbin-path=/bin/nginx \
     --prefix=/cryo/ \
@@ -28,7 +28,7 @@ RUN cd /nginx-1.9.9 && ./configure \
     --lock-path=/cryo/log/nginx.lock \
     --with-stream \
     --with-http_ssl_module \
-    --with-openssl=./openssl-1.0.2f
+    --with-openssl=./openssl-1.0.2h
 
-RUN cd /nginx-1.9.9 && make && make install
+RUN cd /nginx-1.11.1 && make && make install
 CMD ["cp", "/bin/nginx", "/stage/"]

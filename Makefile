@@ -30,6 +30,10 @@ docker:
 	@echo " docker built, see readme for config settings"
 	@echo "----------------------------------------------"
 
+test:
+	cd test/ && \
+			./test.sh
+
 clean:
 	rm -f nginx
 	rm -f stage.0/nginx
