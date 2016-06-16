@@ -1,3 +1,4 @@
+DOCKER_TAG=		nginx
 stage:
 	cd stage.0 && ./build.sh
 	cd stage.0 && cp nginx ../stage.1/aci/ && \
@@ -25,7 +26,7 @@ aci:
 	@echo "---------------------------------------------"
 
 docker:
-	cd stage.1/docker/ && sudo docker build --no-cache -t nginx .
+	cd stage.1/docker/ && sudo docker build --no-cache -t $(DOCKER_TAG) .
 	@echo "----------------------------------------------"
 	@echo " docker built, see readme for config settings"
 	@echo "----------------------------------------------"
