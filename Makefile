@@ -1,7 +1,7 @@
 DOCKER_TAG=		nginx
 stage:
 	cd stage.0 && ./build.sh
-	cd stage.0 && cp nginx ../stage.1/aci/ && \
+	cd stage.0 && cp nginx ../stage.1/aci/nginx-layout/rootfs/bin/ && \
 	mv nginx ../stage.1/docker/
 	@echo "------------------------------------------------------"
 	@echo " nginx binary moved to stage.1/aci and stage.1/docker"
@@ -15,15 +15,16 @@ build:
 	@echo "----------------"
 
 aci:
-	cp nginx stage.1/aci/nginx-layout/rootfs/bin/
 	cd stage.1/aci/ && \
 		cp manifest.json nginx-layout/manifest && \
-		cp nginx nginx-layout/rootfs/bin && \
 		actool build nginx-layout nginx.aci
-	cp stage.1/aci/nginx.aci .
+	mv stage.1/aci/nginx.aci .
 	@echo "---------------------------------------------"
 	@echo " aci built, see readme for config settings"
 	@echo "---------------------------------------------"
+
+importaci:
+	sudo rkt fetch nginx.aci --insecure-options=image
 
 docker:
 	cd stage.1/docker/ && sudo docker build --no-cache -t $(DOCKER_TAG) .
@@ -31,9 +32,13 @@ docker:
 	@echo " docker built, see readme for config settings"
 	@echo "----------------------------------------------"
 
-run:
+rundocker:
 	cd test/ && \
-			./test.sh
+			./testdocker.sh
+
+runrkt:
+	cd test/ && \
+			./testrkt.sh
 
 clean:
 	rm -f nginx

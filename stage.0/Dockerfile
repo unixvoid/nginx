@@ -1,6 +1,5 @@
 FROM alpine
 
-#ENV NGINX_VER nginx-1.9.15
 ENV NGINX_VER nginx-1.11.1
 ENV OPENSSL_VER openssl-1.0.2h
 
