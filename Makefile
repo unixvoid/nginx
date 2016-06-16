@@ -25,12 +25,12 @@ aci:
 	@echo "---------------------------------------------"
 
 docker:
-	cd stage.1/docker/ && sudo docker build -t nginx .
+	cd stage.1/docker/ && sudo docker build --no-cache -t nginx .
 	@echo "----------------------------------------------"
 	@echo " docker built, see readme for config settings"
 	@echo "----------------------------------------------"
 
-test:
+run:
 	cd test/ && \
 			./test.sh
 

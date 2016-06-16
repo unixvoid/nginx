@@ -1,5 +1,9 @@
 FROM alpine
 
+#ENV NGINX_VER nginx-1.9.15
+ENV NGINX_VER nginx-1.11.1
+ENV OPENSSL_VER openssl-1.0.2h
+
 RUN apk update
 RUN apk add \
   pcre-dev \
@@ -9,15 +13,16 @@ RUN apk add \
   perl \
   wget
 
-RUN wget http://nginx.org/download/nginx-1.11.1.tar.gz && \
-    tar -xzf /nginx-1.11.1.tar.gz && \
-    cd /nginx-1.11.1/ && \
-    wget https://www.openssl.org/source/openssl-1.0.2h.tar.gz --no-check-certificate && \
-    tar -xzf openssl-1.0.2h.tar.gz && \
+RUN wget http://nginx.org/download/$NGINX_VER.tar.gz && \
+    tar -xzf /$NGINX_VER.tar.gz && \
+    cd /$NGINX_VER/ && \
+    wget https://www.openssl.org/source/$OPENSSL_VER.tar.gz --no-check-certificate && \
+    tar -xzf $OPENSSL_VER.tar.gz && \
 	wget https://github.com/openresty/headers-more-nginx-module/archive/v0.30.tar.gz --no-check-certificate && \
-	tar -xzf v0.30.tar.gz
+	tar -xzf v0.30.tar.gz && \
+	mv headers-more-nginx-module-0.30 headers-more
 
-RUN cd /nginx-1.11.1 && ./configure \
+RUN cd /$NGINX_VER && ./configure \
     --with-ld-opt="-static" \
     --sbin-path=/bin/nginx \
     --prefix=/cryo/ \
@@ -29,9 +34,9 @@ RUN cd /nginx-1.11.1 && ./configure \
     --pid-path=/cryo/log/nginx.pid \
     --lock-path=/cryo/log/nginx.lock \
     --with-stream \
-    --add-module=./headers-more-nginx-module-0.30 \
+    --add-module=/$NGINX_VER/headers-more \
     --with-http_ssl_module \
-    --with-openssl=./openssl-1.0.2h
+    --with-openssl=./$OPENSSL_VER
 
-RUN cd /nginx-1.11.1 && make && make install
+RUN cd /$NGINX_VER && make && make install
 CMD ["cp", "/bin/nginx", "/stage/"]
