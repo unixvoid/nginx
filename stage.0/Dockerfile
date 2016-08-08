@@ -1,7 +1,9 @@
 FROM alpine
 
-ENV NGINX_VER nginx-1.11.1
+ENV NGINX_VER nginx-1.11.3
 ENV OPENSSL_VER openssl-1.0.2h
+#ENV OPENSSL_VER openssl-1.1.0-pre6
+# apk add linux-headers
 
 RUN apk update
 RUN apk add \
@@ -32,9 +34,10 @@ RUN cd /$NGINX_VER && ./configure \
     --http-client-body-temp-path=/cryo/log/client_body_temp \
     --pid-path=/cryo/log/nginx.pid \
     --lock-path=/cryo/log/nginx.lock \
-    --with-stream \
-    --add-module=/$NGINX_VER/headers-more \
     --with-http_ssl_module \
+    --with-stream \
+    --with-stream_ssl_module \
+    --add-module=/$NGINX_VER/headers-more \
     --with-openssl=./$OPENSSL_VER
 
 RUN cd /$NGINX_VER && make && make install
