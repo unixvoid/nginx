@@ -1,0 +1,21 @@
+services:
+  - docker
+
+script:
+  - make stage
+
+after_success:
+  - make docker
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  - docker tag nginx unixvoid/nginx:develop
+  - docker push unixvoid/nginx:develop
+  - curl -i --form sec=$BINDER_SEC --form file=@`ls stage.1/docker/nginx*` --form path=nginx/ https://cryo.unixvoid.com/upload
+  - curl -i --form sec=$BINDER_SEC --form file=@`ls stage.1/docker/nginx*` --form filename=nginx-latest-linux-amd64 --form path=nginx/ https://cryo.unixvoid.com/upload
+  - curl -d sec=$BINDER_SEC -d key=unixvoid.pub https://cryo.unixvoid.com/getfile --output unixvoid.pub
+  - curl -d sec=$BINDER_SEC -d key=unixvoid.sec https://cryo.unixvoid.com/getfile --output unixvoid.sec
+  - make travisaci
+  - mv ngninx.aci nginx-latest-linux-amd64.aci
+  - cp stage.1/sign.sh . && chmod +x sign.sh
+  - ./sign.sh $GPG_SEC
+  - curl -i --form sec=$BINDER_SEC --form file=@nginx-latest-linux-amd64.aci --form path=rkt/nginx/ https://cryo.unixvoid.com/upload
+  - curl -i --form sec=$BINDER_SEC --form file=@nginx-latest-linux-amd64.aci.asc --form path=rkt/nginx/ https://cryo.unixvoid.com/upload

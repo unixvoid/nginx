@@ -1,0 +1,61 @@
+{
+    "acKind": "ImageManifest",
+    "acVersion": "0.2.0",
+    "name": "unixvoid.com/nginx",
+    "labels": [
+        {
+            "name": "version",
+            "value": "latest"
+        },
+        {
+            "name": "arch",
+            "value": "amd64"
+        },
+        {
+            "name": "os",
+            "value": "linux"
+        }
+    ],
+    "app": {
+        "user": "root",
+        "group": "root",
+        "exec": [
+            "/bin/nginx"
+        ],
+        "ports": [
+        {
+            "name": "web-https",
+            "protocol": "tcp",
+            "port": 443
+        },
+        {
+            "name": "web-http",
+            "protocol": "tcp",
+            "port": 80
+        }
+        ],
+        "mountPoints": [
+        {
+            "name": "conf",
+            "path": "/cryo/conf",
+            "readOnly": true
+        },
+        {
+            "name": "ssl",
+            "path": "/cryo/ssl",
+            "readOnly": true
+        },
+        {
+            "name": "data",
+            "path": "/cryo/data",
+            "readOnly": true
+        }
+        ]
+    },
+    "annotations": [
+        {
+        "name": "authors",
+        "value": "Matthew Faltys <mfaltys@gmail.com>"
+    }
+    ]
+}
