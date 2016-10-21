@@ -1,6 +1,6 @@
 FROM alpine
 
-ENV NGINX_VER nginx-1.11.3
+ENV NGINX_VER nginx-1.11.5
 ENV OPENSSL_VER openssl-1.0.2h
 #ENV OPENSSL_VER openssl-1.1.0-pre6
 # apk add linux-headers
