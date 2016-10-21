@@ -23,6 +23,17 @@ aci:
 	@echo " aci built, see readme for config settings"
 	@echo "---------------------------------------------"
 
+travisaci:
+	wget https://github.com/appc/spec/releases/download/v0.8.7/appc-v0.8.7.tar.gz
+	tar -zxf appc-v0.8.7.tar.gz
+	cd stage.1/aci/ && \
+		cp manifest.json nginx-layout/manifest && \
+		../../appc-v0.8.7/actool build nginx-layout nginx.aci
+	mv stage.1/aci/nginx.aci .
+	@echo "---------------------------------------------"
+	@echo " aci built, see readme for config settings"
+	@echo "---------------------------------------------"
+
 importaci:
 	sudo rkt fetch nginx.aci --insecure-options=image
 
