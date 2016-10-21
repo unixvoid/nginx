@@ -24,9 +24,14 @@
         ],
         "ports": [
         {
-            "name": "www",
+            "name": "web-https",
             "protocol": "tcp",
             "port": 443
+        },
+        {
+            "name": "web-http",
+            "protocol": "tcp",
+            "port": 80
         }
         ],
         "mountPoints": [
