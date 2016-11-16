@@ -1,6 +1,6 @@
 FROM scratch
 
-ADD rootfs.tar /
+ADD rootfs.tar.gz /
 COPY /nginx /bin/
 
 ENTRYPOINT ["/bin/nginx"]
