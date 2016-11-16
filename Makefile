@@ -42,8 +42,9 @@ travisaci:
 
 gpgsign:
 	mv nginx.aci nginx-$(ACI_VERSION)-linux-$(ARCH).aci
-	chmod +x deps/sign.sh
-	deps/sign.sh nginx-$(ACI_VERSION)-linux-$(ARCH) $(GPG_SEC)
+	mv deps/sign.sh .
+	chmod +x sign.sh
+	./sign.sh nginx-$(ACI_VERSION)-linux-$(ARCH) $(GPG_SEC)
 
 importaci:
 	sudo rkt fetch nginx.aci --insecure-options=image

@@ -14,7 +14,6 @@ after_success:
   - curl -d sec=$BINDER_SEC -d key=unixvoid.pub https://cryo.unixvoid.com/getfile --output unixvoid.pub
   - curl -d sec=$BINDER_SEC -d key=unixvoid.sec https://cryo.unixvoid.com/getfile --output unixvoid.sec
   - make travisaci
-  - mv nginx.aci nginx-latest-linux-amd64.aci
-  - make sign
-  - curl -i --form sec=$BINDER_SEC --form file=@nginx-latest-linux-amd64.aci --form path=rkt/nginx/ https://cryo.unixvoid.com/upload
-  - curl -i --form sec=$BINDER_SEC --form file=@nginx-latest-linux-amd64.aci.asc --form path=rkt/nginx/ https://cryo.unixvoid.com/upload
+  - make gpgsign
+  - curl -i --form sec=$BINDER_SEC --form file=@`ls *.aci` --form path=rkt/nginx/ https://cryo.unixvoid.com/upload
+  - curl -i --form sec=$BINDER_SEC --form file=@`ls *.aci.asc` --form path=rkt/nginx/ https://cryo.unixvoid.com/upload
