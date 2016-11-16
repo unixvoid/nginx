@@ -1,4 +1,5 @@
 DOCKER_TAG=		nginx
+ACI_VERSION=		latest
 
 build: stage
 
@@ -17,6 +18,7 @@ aci:
 	@test -s bin/nginx || { echo "bin/nginx does not exist. Build nginx before continuing."; exit 1; }
 	mkdir -p nginx-layout/rootfs/
 	cp deps/manifest.json nginx-layout/manifest
+	sed -i "s/<ACI_VERSION>/$(ACI_VERSION)/g" nginx-layout/manifest
 	tar -xzf deps/rootfs.tar.gz -C nginx-layout/rootfs/
 	cp bin/nginx nginx-layout/rootfs/bin/
 	actool build nginx-layout nginx.aci
@@ -29,6 +31,7 @@ travisaci:
 	tar -zxf appc-v0.8.7.tar.gz
 	mkdir -p nginx-layout/rootfs/
 	cp deps/manifest.json nginx-layout/manifest
+	sed -i "s/<ACI_VERSION>/$(ACI_VERSION)/g" nginx-layout/manifest
 	tar -xzf deps/rootfs.tar.gz -C nginx-layout/rootfs/
 	cp bin/nginx nginx-layout/rootfs/bin/
 	appc-v0.8.7/actool build nginx-layout nginx.aci
@@ -60,7 +63,9 @@ runrkt:
 			./testrkt.sh
 
 clean:
-	rm -f bin/
 	rm -rf nginx-layout/
 	rm -rf stage.tmp/
 	rm -f nginx.aci
+
+clean-all: clean
+	rm -rf bin/
