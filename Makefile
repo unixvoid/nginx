@@ -1,3 +1,4 @@
+ARCH=			amd64
 DOCKER_TAG=		nginx
 ACI_VERSION=		latest
 
@@ -38,6 +39,11 @@ travisaci:
 	@echo "---------------------------------------------"
 	@echo " aci built, see readme for config settings"
 	@echo "---------------------------------------------"
+
+gpgsign:
+	mv nginx.aci nginx-$(ACI_VERSION)-linux-$(ARCH).aci
+	chmod +x deps/sign.sh
+	deps/sign.sh nginx-$(ACI_VERSION)-linux-$(ARCH) $(GPG_SEC)
 
 importaci:
 	sudo rkt fetch nginx.aci --insecure-options=image
