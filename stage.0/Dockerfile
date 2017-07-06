@@ -1,7 +1,7 @@
 FROM alpine
 
-ENV NGINX_VER nginx-1.11.10
-ENV OPENSSL_VER openssl-1.0.2k
+ENV NGINX_VER nginx-1.13.2
+ENV OPENSSL_VER openssl-1.0.2l
 
 RUN apk update
 RUN apk add \
