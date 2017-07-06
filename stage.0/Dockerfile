@@ -1,7 +1,7 @@
 FROM alpine
 
 ENV NGINX_VER nginx-1.11.10
-ENV LIBRESSL_VER libressl-2.5.1
+ENV OPENSSL_VER openssl-1.0.2k
 
 RUN apk update
 RUN apk add \
@@ -16,8 +16,8 @@ RUN apk add \
 RUN wget http://nginx.org/download/$NGINX_VER.tar.gz && \
     tar -xzf /$NGINX_VER.tar.gz && \
     cd /$NGINX_VER/ && \
-    wget https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/$LIBRESSL_VER.tar.gz --no-check-certificate && \
-    tar -xzf $LIBRESSL_VER.tar.gz && \
+    wget https://www.openssl.org/source/$OPENSSL_VER.tar.gz --no-check-certificate && \
+    tar -xzf $OPENSSL_VER.tar.gz && \
 	wget https://github.com/openresty/headers-more-nginx-module/archive/v0.30.tar.gz --no-check-certificate && \
 	tar -xzf v0.30.tar.gz && \
 	mv headers-more-nginx-module-0.30 headers-more
@@ -37,7 +37,7 @@ RUN cd /$NGINX_VER && ./configure \
     --with-stream \
     --with-stream_ssl_module \
     --add-module=/$NGINX_VER/headers-more \
-    --with-openssl=./$LIBRESSL_VER
+    --with-openssl=./$OPENSSL_VER
 
 RUN cd /$NGINX_VER && make && make install
 CMD ["cp", "/bin/nginx", "/stage/"]
