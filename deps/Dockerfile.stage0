@@ -1,6 +1,5 @@
 FROM alpine
 
-#ENV NGINX_VER nginx-1.13.3
 ENV NGINX_VER nginx-1.13.9
 ENV SSL_VER libressl-2.6.4
 ENV SSL_URL https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.6.4.tar.gz
