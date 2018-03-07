@@ -1,6 +1,6 @@
-ARCH=			amd64
-DOCKER_TAG=		nginx
-ACI_VERSION=		latest
+ARCH=         amd64
+DOCKER_TAG=   nginx
+ACI_VERSION=  latest
 
 build: stage
 
