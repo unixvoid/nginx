@@ -20,9 +20,9 @@ on to build the actual containers (stage.1).
   this build of nginx takes 3 mounts to get running. the conf, ssl (if needed), and data.
   these can be mounted to the following directories inside of the container.
   ```
-  /cryo/conf/   : nginx.conf goes here
-  /cryo/ssl     : ssl certs go here
-  /cryo/data    : and shared content to be served goes here
+  /conf/   : nginx.conf goes here
+  /ssl     : ssl certs go here
+  /data    : and shared content to be served goes here
   ```
 
 - **dependencies**  

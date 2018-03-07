@@ -5,7 +5,7 @@
     "labels": [
         {
             "name": "version",
-            "value": "latest"
+            "value": "<ACI_VERSION>"
         },
         {
             "name": "arch",
