@@ -35,16 +35,16 @@ travisaci:
 	sed -i "s/<ACI_VERSION>/$(ACI_VERSION)/g" nginx-layout/manifest
 	tar -xzf deps/rootfs.tar.gz -C nginx-layout/rootfs/
 	cp bin/nginx nginx-layout/rootfs/bin/
-	appc-v0.8.7/actool build nginx-layout nginx.aci
+	appc-v0.8.7/actool build nginx-layout nginx-$(ACI_VERSION)-linux-$(ARCH).aci
 	@echo "---------------------------------------------"
 	@echo " aci built, see readme for config settings"
 	@echo "---------------------------------------------"
 
-gpgsign:
-	mv nginx.aci nginx-$(ACI_VERSION)-linux-$(ARCH).aci
-	mv deps/sign.sh .
-	chmod +x sign.sh
-	./sign.sh nginx-$(ACI_VERSION)-linux-$(ARCH) $(GPG_SEC)
+#gpgsign:
+#	mv nginx.aci nginx-$(ACI_VERSION)-linux-$(ARCH).aci
+#	mv deps/sign.sh .
+#	chmod +x sign.sh
+#	./sign.sh nginx-$(ACI_VERSION)-linux-$(ARCH) $(GPG_SEC)
 
 importaci:
 	sudo rkt fetch nginx.aci --insecure-options=image

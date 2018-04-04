@@ -4,15 +4,16 @@
 #   aci to be signed, and the security password
 #   for the key. example:
 #   ./sign.sh nginx-latest-amd64 supersecretpass
+NAME=$(ls *.aci)
 
 echo "===================================="
 ls -alh
 echo "===================================="
 
-echo $2 | gpg \
+echo $1 | gpg \
 	--passphrase-fd 0 \
 	--batch --yes \
 	--no-default-keyring --armor \
 	--secret-keyring ./unixvoid.sec --keyring ./unixvoid.pub \
-	--output $1.aci.asc \
-	--detach-sig $1.aci
+  --output $(NAME).asc \
+  --detach-sig $(NAME)
