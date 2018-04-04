@@ -1,8 +1,8 @@
 FROM alpine
 
-ENV NGINX_VER nginx-1.13.9
-ENV SSL_VER libressl-2.6.4
-ENV SSL_URL https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.6.4.tar.gz
+ENV NGINX_VER nginx-1.13.11
+ENV SSL_VER libressl-2.7.2
+ENV SSL_URL https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.7.2.tar.gz
 
 RUN apk update
 RUN apk add \

@@ -7,8 +7,7 @@ script:
 after_success:
   - make docker
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-  - docker tag nginx unixvoid/nginx:develop
-  - docker push unixvoid/nginx:develop
+  - make travispushdocker
   - curl -i --form sec=$BINDER_SEC --form file=@bin/nginx --form path=nginx/ https://cryo.unixvoid.com/upload
   - curl -i --form sec=$BINDER_SEC --form file=@bin/nginx --form filename=nginx-latest-linux-amd64 --form path=nginx/ https://cryo.unixvoid.com/upload
   - curl -d sec=$BINDER_SEC -d key=unixvoid.pub https://cryo.unixvoid.com/getfile --output unixvoid.pub

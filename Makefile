@@ -1,6 +1,6 @@
 ARCH=         amd64
 DOCKER_TAG=   nginx
-ACI_VERSION=  1.13.9
+ACI_VERSION=  1.13.11
 
 build: stage
 
@@ -56,10 +56,14 @@ docker:
 	cp deps/Dockerfile.stage1 stage.tmp/Dockerfile
 	cp deps/rootfs.tar.gz stage.tmp/
 	cp bin/nginx stage.tmp/
-	cd stage.tmp && sudo docker build --no-cache -t $(DOCKER_TAG) .
+	cd stage.tmp && sudo docker build --no-cache -t $(DOCKER_TAG):$(ACI_VERSION) .
 	@echo "----------------------------------------------"
 	@echo " image: '$(DOCKER_TAG)' built"
 	@echo "----------------------------------------------"
+
+travispushdocker:
+	docker tag $(DOCKER_TAG):$(ACI_VERSION) unixvoid/$(DOCKER_TAG):$(ACI_VERSION)
+	docker push unixvoid/$(DOCKER_TAG):$(ACI_VERSION)
 
 rundocker:
 	cd deps/test/ && \
