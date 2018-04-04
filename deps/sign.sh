@@ -15,5 +15,5 @@ echo $1 | gpg \
 	--batch --yes \
 	--no-default-keyring --armor \
 	--secret-keyring ./unixvoid.sec --keyring ./unixvoid.pub \
-  --output $(NAME).asc \
-  --detach-sig $(NAME)
+  --output $NAME.asc \
+  --detach-sig $NAME
