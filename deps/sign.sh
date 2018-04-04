@@ -5,6 +5,10 @@
 #   for the key. example:
 #   ./sign.sh nginx-latest-amd64 supersecretpass
 
+echo "===================================="
+ls -alh
+echo "===================================="
+
 echo $2 | gpg \
 	--passphrase-fd 0 \
 	--batch --yes \
