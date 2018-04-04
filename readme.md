@@ -1,6 +1,7 @@
 micro nginx
 -----------
 
+[![Build Status (Travis)](https://travis-ci.org/unixvoid/nginx.svg?branch=master)](https://travis-ci.org/unixvoid/nginx)  
 This project is dedicated to making a very small, but fully functional nginx container.
 In this repo I will address both a docker and an appc container. Because my aim is to make the
 container small, we will be statically compiling an nginx binary first (stage.0), and then moving
