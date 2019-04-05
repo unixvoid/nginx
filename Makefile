@@ -1,6 +1,6 @@
 ARCH=         amd64
 DOCKER_TAG=   nginx
-ACI_VERSION=  1.13.11
+ACI_VERSION=  1.15.10
 
 build: stage
 

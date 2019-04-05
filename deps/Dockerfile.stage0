@@ -1,8 +1,8 @@
 FROM alpine
 
-ENV NGINX_VER nginx-1.13.11
-ENV SSL_VER libressl-2.7.2
-ENV SSL_URL https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.7.2.tar.gz
+ENV NGINX_VER nginx-1.15.10
+ENV SSL_VER libressl-2.9.0
+ENV SSL_URL https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.9.0.tar.gz
 
 RUN apk update
 RUN apk add \
@@ -19,9 +19,9 @@ RUN wget http://nginx.org/download/$NGINX_VER.tar.gz && \
     cd /$NGINX_VER/ && \
     wget $SSL_URL --no-check-certificate && \
     tar -xzf $SSL_VER.tar.gz && \
-	wget https://github.com/openresty/headers-more-nginx-module/archive/v0.30.tar.gz --no-check-certificate && \
-	tar -xzf v0.30.tar.gz && \
-	mv headers-more-nginx-module-0.30 headers-more
+	wget https://github.com/openresty/headers-more-nginx-module/archive/v0.33.tar.gz --no-check-certificate && \
+	tar -xzf v0.33.tar.gz && \
+	mv headers-more-nginx-module-0.33 headers-more
 
 RUN cd /$NGINX_VER && ./configure \
     --with-ld-opt="-static" \

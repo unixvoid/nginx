@@ -7,4 +7,5 @@ sudo docker run \
 	--name nginxtest \
 	-v $CURRENT_DIR/nginx.conf:/nginx/conf/nginx.conf:ro \
 	-v $CURRENT_DIR/index.html:/nginx/data/index.html:ro \
-	nginx
+  -v $CURRENT_DIR/logs:/nginx/log/:rw \
+	nginx:1.15.10
